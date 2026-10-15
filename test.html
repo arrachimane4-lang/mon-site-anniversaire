@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Une surprise pour toi ❤️</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ===================== ÉCRAN LETTRE ===================== -->
+    <section id="letterScreen" class="screen active">
+
+        <div class="stars"></div>
+
+        <div class="letter-container">
+
+            <div class="letter" id="letter">
+
+                <div class="envelope-back"></div>
+
+                <div class="envelope-flap">
+                    <div class="seal">♥</div>
+                </div>
+
+                <div class="letter-paper">
+
+                    <div class="paper-decoration">✦</div>
+
+                    <h2>Une petite surprise...</h2>
+
+                    <p>
+                        Cette lettre est spécialement pour toi.
+                    </p>
+
+                    <p class="open-text">
+                        Ouvre-moi Mouad
+                    </p>
+
+                    <div class="paper-heart">♡</div>
+
+                </div>
+
+            </div>
+
+            <p class="instruction">
+                ✨ Clique sur la lettre pour l'ouvrir ✨
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- ===================== ÉCRAN ANNIVERSAIRE ===================== -->
+    <section id="birthdayScreen" class="screen">
+
+        <canvas id="fireworks"></canvas>
+
+        <div class="birthday-content">
+
+            <div class="small-stars">✦　✧　✦　✧　✦</div>
+
+            <h1>
+                Joyeux<br>
+                <span>Anniversaire !</span>
+            </h1>
+
+            <div class="heart">♥</div>
+
+            <p>
+                Que cette nouvelle année de ta vie
+                soit remplie de bonheur, de réussite,
+                de beaux souvenirs et de magnifiques surprises.
+            </p>
+
+            <button id="cakeButton">
+                🎁 yallah yalah Passe au gâteau !
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- ===================== ÉCRAN GÂTEAU ===================== -->
+    <section id="cakeScreen" class="screen">
+
+        <div class="cake-background"></div>
+
+        <div class="cake-content">
+
+            <h2>yalh wa7aad joooj tlataaaa</h2>
+
+            <p class="cake-instruction">
+                Clique sur les bougies pour les éteindre 🕯️
+            </p>
+
+            <div class="cake-wrapper">
+
+                <!-- Flamme 1 -->
+                <div class="candle candle1">
+                    <div class="flame"></div>
+                    <div class="candle-body"></div>
+                </div>
+
+                <!-- Flamme 2 -->
+                <div class="candle candle2">
+                    <div class="flame"></div>
+                    <div class="candle-body"></div>
+                </div>
+
+                <!-- Flamme 3 -->
+                <div class="candle candle3">
+                    <div class="flame"></div>
+                    <div class="candle-body"></div>
+                </div>
+
+                <!-- Flamme 4 -->
+                <div class="candle candle4">
+                    <div class="flame"></div>
+                    <div class="candle-body"></div>
+                </div>
+
+                <!-- Flamme 5 -->
+                <div class="candle candle5">
+                    <div class="flame"></div>
+                    <div class="candle-body"></div>
+                </div>
+
+                <!-- Gâteau -->
+                <div class="cake">
+
+                    <div class="cake-top">
+
+                        <div class="chocolate-drip drip1"></div>
+                        <div class="chocolate-drip drip2"></div>
+                        <div class="chocolate-drip drip3"></div>
+                        <div class="chocolate-drip drip4"></div>
+                        <div class="chocolate-drip drip5"></div>
+
+                        <div class="cake-message">
+                            ÉTEINDRE<br>
+                            LES BOUGIES
+                        </div>
+
+                        <div class="strawberry strawberry1">🍓</div>
+                        <div class="strawberry strawberry2">🍓</div>
+                        <div class="strawberry strawberry3">🍓</div>
+
+                    </div>
+
+                    <div class="cake-middle"></div>
+
+                    <div class="cake-bottom"></div>
+
+                    <div class="cake-shadow"></div>
+
+                </div>
+
+            </div>
+
+            <div id="counter">
+                Bougies restantes : <span>5</span>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ===================== MESSAGE FINAL ===================== -->
+    <section id="finalScreen" class="screen">
+
+        <div class="confetti"></div>
+
+        <div class="final-message">
+
+            <div class="final-hearts">
+                ♥ ♥ ♥
+            </div>
+
+            <h1>
+                Joyeux Anniversaire ! 🎂
+            </h1>
+
+
+    
+
+            <p class="wish">
+                Que tous tes rêves se réalisent,
+                que chaque jour t'apporte une nouvelle raison
+                de sourire et que cette nouvelle année
+                soit encore plus belle que la précédente.
+            </p>
+
+            <div class="signature">
+                Avec beaucoup de bonheur Modo et b s7a w salama  ✨
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>

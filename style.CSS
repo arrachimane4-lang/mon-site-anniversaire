@@ -1,0 +1,1727 @@
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+
+/* =========================================================
+   STRUCTURE DES ÉCRANS
+========================================================= */
+
+.screen {
+    position: fixed;
+    inset: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition:
+        opacity 1s ease,
+        visibility 1s ease;
+
+    overflow: hidden;
+}
+
+.screen.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+/* =========================================================
+   ÉCRAN 1 — LETTRE
+========================================================= */
+
+#letterScreen {
+    background:
+        radial-gradient(
+            circle at 50% 40%,
+            #66372c 0%,
+            #3a1b15 42%,
+            #180807 100%
+        );
+}
+
+
+/* petites étoiles en arrière-plan */
+
+.stars {
+    position: absolute;
+    inset: 0;
+
+    background-image:
+        radial-gradient(
+            circle,
+            rgba(255, 220, 160, 0.8) 1px,
+            transparent 2px
+        ),
+        radial-gradient(
+            circle,
+            rgba(255, 255, 255, 0.5) 1px,
+            transparent 2px
+        );
+
+    background-size:
+        100px 100px,
+        150px 150px;
+
+    animation: starMove 8s linear infinite;
+}
+
+@keyframes starMove {
+
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-100px);
+    }
+}
+
+
+/* =========================================================
+   CONTENEUR LETTRE
+========================================================= */
+
+.letter-container {
+    position: relative;
+
+    z-index: 10;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   ENVELOPPE
+========================================================= */
+
+.letter {
+    position: relative;
+
+    width: 460px;
+    height: 300px;
+
+    cursor: pointer;
+
+    transform-style: preserve-3d;
+
+    filter:
+        drop-shadow(
+            0 30px 30px rgba(0, 0, 0, 0.6)
+        );
+
+    transition:
+        transform 0.4s ease;
+}
+
+.letter:hover {
+    transform:
+        translateY(-8px)
+        rotateX(3deg);
+}
+
+
+/* arrière de l'enveloppe */
+
+.envelope-back {
+    position: absolute;
+
+    inset: 0;
+
+    border-radius: 8px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #f5dfbd,
+            #c79b70
+        );
+
+    box-shadow:
+        inset 0 0 0 2px
+        rgba(100, 50, 20, 0.2);
+}
+
+
+/* =========================================================
+   FEUILLE À L'INTÉRIEUR
+========================================================= */
+
+.letter-paper {
+    position: absolute;
+
+    left: 40px;
+    top: 25px;
+
+    width: 380px;
+    height: 250px;
+
+    padding: 35px 25px;
+
+    background:
+        linear-gradient(
+            120deg,
+            #fff9e9,
+            #ead3af
+        );
+
+    border-radius: 4px;
+
+    box-shadow:
+        0 5px 15px
+        rgba(0, 0, 0, 0.25);
+
+    z-index: 2;
+
+    transition:
+        transform 1s ease;
+}
+
+.letter-paper h2 {
+    color: #55251c;
+
+    font-size: 28px;
+
+    margin-bottom: 18px;
+}
+
+.letter-paper p {
+    color: #70463a;
+
+    font-size: 16px;
+
+    line-height: 1.5;
+}
+
+.open-text {
+    margin-top: 25px;
+
+    font-size: 23px !important;
+
+    font-style: italic;
+
+    color: #8a2e2e !important;
+}
+
+.paper-decoration {
+    color: #c69b42;
+
+    font-size: 25px;
+
+    margin-bottom: 5px;
+}
+
+.paper-heart {
+    margin-top: 12px;
+
+    color: #a82c2c;
+
+    font-size: 30px;
+}
+
+
+/* =========================================================
+   RABAT DE L'ENVELOPPE
+========================================================= */
+
+.envelope-flap {
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 460px;
+    height: 170px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #f2d6ad,
+            #c18d62
+        );
+
+    clip-path:
+        polygon(
+            0 0,
+            100% 0,
+            50% 100%
+        );
+
+    transform-origin: top center;
+
+    z-index: 5;
+
+    transition:
+        transform 1.2s
+        cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+
+/* =========================================================
+   SCEAU ROUGE
+========================================================= */
+
+.seal {
+    position: absolute;
+
+    left: 50%;
+    top: 82px;
+
+    transform:
+        translateX(-50%);
+
+    width: 52px;
+    height: 52px;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at 30% 25%,
+            #e65c5c,
+            #8e151b
+        );
+
+    color: #ffd9a0;
+
+    font-size: 25px;
+
+    box-shadow:
+        0 5px 10px
+        rgba(0, 0, 0, 0.4);
+}
+
+
+/* =========================================================
+   ANIMATION OUVERTURE LETTRE
+========================================================= */
+
+.letter.open .envelope-flap {
+
+    transform:
+        rotateX(180deg);
+}
+
+
+/* =========================================================
+   INSTRUCTION
+========================================================= */
+
+.instruction {
+    margin-top: 35px;
+
+    color: #ffe8c8;
+
+    font-size: 18px;
+
+    text-shadow:
+        0 2px 5px
+        rgba(0, 0, 0, 0.5);
+
+    animation:
+        floating 2s
+        infinite
+        ease-in-out;
+}
+
+@keyframes floating {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+
+/* =========================================================
+   ÉCRAN 2 — ANNIVERSAIRE + FEUX D'ARTIFICE
+========================================================= */
+
+#birthdayScreen {
+
+    background:
+        radial-gradient(
+            circle at center,
+            #111e46 0%,
+            #070918 65%,
+            #02030a 100%
+        );
+}
+
+
+/* canvas des feux d'artifice */
+
+#fireworks {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    pointer-events: none;
+}
+
+
+/* contenu */
+
+.birthday-content {
+    position: relative;
+
+    z-index: 10;
+
+    width: 700px;
+
+    text-align: center;
+
+    color: white;
+}
+
+
+/* étoiles */
+
+.small-stars {
+
+    color: #ffd873;
+
+    font-size: 25px;
+
+    margin-bottom: 15px;
+
+    text-shadow:
+        0 0 10px
+        rgba(255, 210, 90, 0.8);
+}
+
+
+/* titre */
+
+.birthday-content h1 {
+
+    font-size: 70px;
+
+    line-height: 0.95;
+
+    color: #fff1bd;
+
+    text-shadow:
+        0 0 10px #ffcf5c,
+        0 0 25px
+        rgba(255, 180, 50, 0.5);
+
+    animation:
+        titleAppear 1.5s ease;
+}
+
+.birthday-content h1 span {
+
+    font-size: 55px;
+
+    color: #ffd15c;
+}
+
+
+/* apparition du titre */
+
+@keyframes titleAppear {
+
+    from {
+        opacity: 0;
+
+        transform:
+            scale(0.5);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            scale(1);
+    }
+}
+
+
+/* coeur */
+
+.heart {
+
+    font-size: 45px;
+
+    color: #ff5b65;
+
+    margin: 20px;
+
+    animation:
+        heartbeat 1s
+        infinite;
+}
+
+@keyframes heartbeat {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.25);
+    }
+}
+
+
+/* texte */
+
+.birthday-content p {
+
+    max-width: 600px;
+
+    margin: auto;
+
+    font-size: 19px;
+
+    line-height: 1.7;
+
+    color: #f6e7cf;
+}
+
+
+/* =========================================================
+   BOUTON GÂTEAU
+========================================================= */
+
+#cakeButton {
+
+    margin-top: 35px;
+
+    padding: 16px 35px;
+
+    border:
+        1px solid #ffd56b;
+
+    border-radius: 50px;
+
+    background:
+        linear-gradient(
+            120deg,
+            #a46a15,
+            #e5b83d
+        );
+
+    color: white;
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 0 20px
+        rgba(255, 190, 50, 0.5);
+
+    transition:
+        0.3s ease;
+}
+
+#cakeButton:hover {
+
+    transform:
+        scale(1.08);
+
+    box-shadow:
+        0 0 35px
+        rgba(255, 210, 80, 0.9);
+}
+
+
+/* =========================================================
+   ÉCRAN 3 — GÂTEAU
+========================================================= */
+
+#cakeScreen {
+
+    background:
+        radial-gradient(
+            ellipse at 50% 35%,
+            #593027 0%,
+            #321510 45%,
+            #130604 100%
+        );
+}
+
+
+/* contenu gâteau */
+
+.cake-content {
+
+    position: relative;
+
+    z-index: 5;
+
+    width: 900px;
+
+    text-align: center;
+}
+
+
+/* titre gâteau */
+
+.cake-content h2 {
+
+    color: #ffe8bd;
+
+    font-size: 30px;
+
+    margin-bottom: 8px;
+
+    text-shadow:
+        0 2px 8px
+        rgba(0, 0, 0, 0.7);
+}
+
+
+/* instruction */
+
+.cake-instruction {
+
+    color: #e6c7a8;
+
+    font-size: 17px;
+
+    margin-bottom: 5px;
+}
+
+
+/* =========================================================
+   CONTENEUR DU GÂTEAU
+========================================================= */
+
+.cake-wrapper {
+
+    position: relative;
+
+    width: 700px;
+    height: 440px;
+
+    margin: 0 auto;
+
+    transform:
+        perspective(1200px)
+        rotateX(7deg);
+
+    filter:
+        drop-shadow(
+            0 35px 25px
+            rgba(0, 0, 0, 0.7)
+        );
+
+    transform-style: preserve-3d;
+}
+
+
+/* =========================================================
+   GÂTEAU PRINCIPAL
+========================================================= */
+
+.cake {
+
+    position: absolute;
+
+    left: 70px;
+    bottom: 45px;
+
+    width: 560px;
+    height: 230px;
+
+    transform-style: preserve-3d;
+}
+
+
+/* =========================================================
+   COUCHE INFÉRIEURE
+========================================================= */
+
+.cake-bottom {
+
+    position: absolute;
+
+    left: 0;
+    bottom: 0;
+
+    width: 560px;
+    height: 252px;
+
+    border-radius:
+        0 0 28px 28px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #210805 0%,
+            #42130b 8%,
+            #702918 25%,
+            #8f3a20 50%,
+            #702918 75%,
+            #42130b 92%,
+            #210805 100%
+        );
+
+    box-shadow:
+
+        inset 0 -18px 25px
+        rgba(20, 3, 0, 0.65),
+
+        inset 0 8px 12px
+        rgba(255, 185, 110, 0.16),
+
+        0 10px 15px
+        rgba(0, 0, 0, 0.45);
+}
+
+
+/* texture */
+
+.cake-bottom::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 20px;
+
+    width: 100%;
+    height: 5px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 190, 130, 0.25),
+            transparent
+        );
+}
+
+
+/* =========================================================
+   COUCHE CENTRALE
+========================================================= */
+
+/*.cake-middle {
+
+    position: absolute;
+
+    left: 15px;
+    bottom: 105px;
+
+    width: 530px;
+    height: 85px;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            180deg,
+            #c77642 0%,
+            #8d3d20 40%,
+            #5b2012 100%
+        );
+
+    box-shadow:
+
+        inset 0 10px 15px
+        rgba(255, 220, 170, 0.2),
+
+        inset 0 -12px 15px
+        rgba(40, 5, 0, 0.4);
+}
+
+
+/* crème entre les couches */
+
+/*.cake-middle::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 15px;
+    top: 28px;
+
+    width: 500px;
+    height: 25px;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            180deg,
+            #f0d0a0,
+            #c58c60
+        );
+
+    box-shadow:
+        0 4px 8px
+        rgba(0, 0, 0, 0.3);
+}
+
+
+/* =========================================================
+   DESSUS DU GÂTEAU
+========================================================= */
+
+/*.cake-top {
+
+    position: absolute;
+
+    left: 0;
+    bottom: 155px;
+
+    width: 560px;
+    height: 135px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            ellipse at 50% 35%,
+            #a9512b 0%,
+            #7a2d19 45%,
+            #43140c 78%,
+            #250905 100%
+        );
+
+    box-shadow:
+
+        inset 0 15px 20px
+        rgba(255, 190, 120, 0.2),
+
+        inset 0 -12px 20px
+        rgba(25, 3, 0, 0.55),
+
+        0 8px 12px
+        rgba(0, 0, 0, 0.45);
+
+    z-index: 4;
+}
+
+
+/* glaçage */
+
+/*.cake-top::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: 25px;
+    top: 30px;
+
+    width: 510px;
+    height: 85px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            ellipse at 50% 35%,
+            #6d2a17,
+            #351009
+        );
+
+    box-shadow:
+        inset 0 8px 12px
+        rgba(255, 190, 120, 0.14);
+}
+
+
+/* décoration brillante */
+
+/*.cake-top::after {
+
+    content:
+        "✦    ✦    ✦";
+
+    position: absolute;
+
+    left: 0;
+    top: 38px;
+
+    width: 100%;
+
+    color: #e8bd70;
+
+    font-size: 18px;
+
+    letter-spacing: 25px;
+
+    z-index: 9;
+
+    opacity: 0.7;
+}
+
+
+/* =========================================================
+   CHOCOLAT QUI COULE
+========================================================= */
+
+/*.chocolate-drip {
+
+    position: absolute;
+
+    top: 80px;
+
+    z-index: 8;
+
+    background:
+        linear-gradient(
+            90deg,
+            #2a0804,
+            #571b0d 45%,
+            #2a0804
+        );
+
+    border-radius:
+        0 0 18px 18px;
+
+    box-shadow:
+        2px 3px 5px
+        rgba(0, 0, 0, 0.35);
+}
+
+
+/* différentes coulures */
+
+/*.drip1 {
+
+    left: 75px;
+
+    width: 38px;
+    height: 65px;
+}
+
+.drip2 {
+
+    left: 165px;
+
+    width: 32px;
+    height: 38px;
+}
+
+.drip3 {
+
+    left: 270px;
+
+    width: 45px;
+    height: 75px;
+}
+
+.drip4 {
+
+    left: 385px;
+
+    width: 35px;
+    height: 45px;
+}
+
+.drip5 {
+
+    left: 470px;
+
+    width: 42px;
+    height: 68px;
+}
+
+
+/* =========================================================
+   PLAQUE "ÉTEINDRE LES BOUGIES"
+========================================================= */
+
+.cake-message {
+
+    position: absolute;
+
+    z-index: 20;
+
+    left: 195px;
+    top: 42px;
+
+    width: 170px;
+    height: 62px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            145deg,
+            #54180d,
+            #2b0804
+        );
+
+    border:
+        2px solid #d8a84d;
+
+    border-radius: 8px;
+
+    color: #ffe18a;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    line-height: 1.25;
+
+    box-shadow:
+
+        0 5px 12px
+        rgba(0, 0, 0, 0.55),
+
+        inset 0 1px 3px
+        rgba(255, 220, 150, 0.25);
+}
+
+
+/* =========================================================
+   FRAISES
+========================================================= */
+
+.strawberry {
+
+    position: absolute;
+
+    z-index: 25;
+
+    font-size: 34px;
+
+    filter:
+        drop-shadow(
+            0 5px 3px
+            rgba(0, 0, 0, 0.5)
+        );
+
+    transform:
+        rotate(-10deg);
+}
+
+.strawberry1 {
+
+    left: 70px;
+    top: 18px;
+}
+
+.strawberry2 {
+
+    right: 65px;
+    top: 20px;
+
+    transform:
+        rotate(12deg);
+}
+
+.strawberry3 {
+
+    left: 255px;
+    top: 2px;
+
+    transform:
+        rotate(-3deg);
+}
+
+
+/* =========================================================
+   BOUGIES
+========================================================= */
+
+.candle {
+
+    position: absolute;
+
+    z-index: 50;
+
+    width: 30px;
+    height: 115px;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.3s ease;
+}
+
+.candle:hover {
+
+    transform:
+        translateY(-8px)
+        scale(1.04);
+}
+
+
+/* corps de la bougie */
+
+.candle-body {
+
+    position: absolute;
+
+    left: 5px;
+    bottom: 0;
+
+    width: 20px;
+    height: 82px;
+
+    border-radius:
+        5px 5px 3px 3px;
+
+    background:
+        repeating-linear-gradient(
+            90deg,
+            #fff9dc 0px,
+            #fff9dc 5px,
+            #e1b65c 6px,
+            #fff5c9 10px
+        );
+
+    box-shadow:
+
+        inset -4px 0 6px
+        rgba(0, 0, 0, 0.22),
+
+        2px 3px 5px
+        rgba(0, 0, 0, 0.3);
+}
+
+
+/* décoration bougie */
+
+.candle-body::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 25px;
+
+    width: 100%;
+    height: 3px;
+
+    background:
+        rgba(177, 110, 30, 0.45);
+}
+
+
+/* mèche */
+
+.candle-body::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 3px;
+    height: 12px;
+
+    left: 8px;
+    top: -11px;
+
+    background: #25100a;
+
+    border-radius: 3px;
+}
+
+
+/* =========================================================
+   FLAMME
+========================================================= */
+
+.flame {
+
+    position: absolute;
+
+    z-index: 5;
+
+    left: 1px;
+    top: -47px;
+
+    width: 28px;
+    height: 43px;
+
+    border-radius:
+        50% 50% 45% 45%;
+
+    background:
+        radial-gradient(
+            ellipse at 50% 75%,
+            #fffef0 0%,
+            #ffe14a 28%,
+            #ff9d00 58%,
+            #ff5100 75%,
+            transparent 76%
+        );
+
+    filter:
+        drop-shadow(
+            0 0 8px #ffb300
+        )
+        drop-shadow(
+            0 0 18px
+            rgba(255, 120, 0, 0.8)
+        );
+
+    animation:
+        realisticFlame 0.13s
+        infinite alternate;
+}
+
+@keyframes realisticFlame {
+
+    0% {
+
+        transform:
+            scaleX(0.88)
+            scaleY(1)
+            rotate(-3deg);
+    }
+
+    100% {
+
+        transform:
+            scaleX(1.08)
+            scaleY(1.12)
+            rotate(4deg);
+    }
+}
+
+
+/* =========================================================
+   POSITION DES BOUGIES
+========================================================= */
+
+.candle1 {
+
+    left: 145px;
+    bottom: 270px;
+}
+
+.candle2 {
+
+    left: 230px;
+    bottom: 290px;
+}
+
+.candle3 {
+
+    left: 315px;
+    bottom: 300px;
+}
+
+.candle4 {
+
+    left: 400px;
+    bottom: 290px;
+}
+
+.candle5 {
+
+    left: 485px;
+    bottom: 270px;
+}
+
+
+/* =========================================================
+   BOUGIE ÉTEINTE
+========================================================= */
+
+.candle.off .flame {
+
+    opacity: 0;
+
+    transform:
+        scale(0.15)
+        translateY(25px);
+
+    transition:
+        0.4s ease;
+}
+
+
+/* fumée */
+
+.candle.off .candle-body::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 2px;
+    top: -30px;
+
+    width: 17px;
+    height: 35px;
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(210, 210, 210, 0.55),
+            transparent 70%
+        );
+
+    filter: blur(4px);
+
+    animation:
+        smoke 2s
+        ease-out
+        forwards;
+}
+
+@keyframes smoke {
+
+    0% {
+
+        opacity: 0.8;
+
+        transform:
+            translateY(0)
+            scale(0.7);
+    }
+
+    100% {
+
+        opacity: 0;
+
+        transform:
+            translateY(-60px)
+            translateX(15px)
+            scale(1.7);
+    }
+}
+
+
+/* =========================================================
+   COMPTEUR
+========================================================= */
+
+#counter {
+
+    margin-top: 5px;
+
+    color: #ffe6b5;
+
+    font-size: 18px;
+
+    text-shadow:
+        0 2px 5px
+        rgba(0, 0, 0, 0.8);
+}
+
+
+/* =========================================================
+   PETITS EFFETS AUTOUR DU GÂTEAU
+========================================================= */
+
+.cake-wrapper::before {
+
+    content: "✦";
+
+    position: absolute;
+
+    left: 30px;
+    top: 150px;
+
+    color: #f6c968;
+
+    font-size: 25px;
+
+    animation:
+        sparkle 1.5s
+        infinite;
+}
+
+.cake-wrapper::after {
+
+    content: "✦";
+
+    position: absolute;
+
+    right: 25px;
+    top: 130px;
+
+    color: #f6c968;
+
+    font-size: 20px;
+
+    animation:
+        sparkle 1.2s
+        infinite;
+}
+
+@keyframes sparkle {
+
+    0%,
+    100% {
+
+        opacity: 0.3;
+
+        transform:
+            scale(0.7);
+    }
+
+    50% {
+
+        opacity: 1;
+
+        transform:
+            scale(1.3);
+    }
+}
+
+
+/* =========================================================
+   ÉCRAN FINAL
+========================================================= */
+
+#finalScreen {
+
+    background:
+        radial-gradient(
+            circle at center,
+            #632d1e 0%,
+            #210b08 65%,
+            #080302 100%
+        );
+}
+
+
+/* carte finale */
+
+.final-message {
+
+    position: relative;
+
+    z-index: 20;
+
+    width: 650px;
+
+    padding: 50px;
+
+    text-align: center;
+
+    border-radius: 25px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255, 245, 220, 0.97),
+            rgba(232, 194, 151, 0.97)
+        );
+
+    box-shadow:
+        0 30px 80px
+        rgba(0, 0, 0, 0.7);
+
+    animation:
+        finalAppear 1.5s ease;
+}
+
+@keyframes finalAppear {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            scale(0.5)
+            translateY(50px);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            scale(1)
+            translateY(0);
+    }
+}
+
+
+/* coeurs */
+
+.final-hearts {
+
+    color: #a82d2d;
+
+    font-size: 25px;
+
+    letter-spacing: 10px;
+}
+
+
+/* titre final */
+
+.final-message h1 {
+
+    margin: 20px 0;
+
+    color: #662719;
+
+    font-size: 43px;
+}
+
+
+/* texte final */
+
+.final-message > p {
+
+    color: #704536;
+
+    font-size: 18px;
+
+    line-height: 1.6;
+}
+
+
+/* gros coeur */
+
+.big-heart {
+
+    font-size: 70px;
+
+    margin: 15px;
+
+    animation:
+        heartbeat 1s
+        infinite;
+}
+
+
+/* souhait */
+
+.wish {
+
+    font-style: italic;
+
+    margin-top: 15px;
+}
+
+
+/* signature */
+
+.signature {
+
+    margin-top: 25px;
+
+    color: #a06736;
+
+    font-size: 17px;
+}
+
+
+/* =========================================================
+   CONFETTIS
+========================================================= */
+
+.confetti {
+
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    background-image:
+
+        radial-gradient(
+            circle,
+            #ffd166 3px,
+            transparent 4px
+        ),
+
+        radial-gradient(
+            circle,
+            #ff6b6b 3px,
+            transparent 4px
+        ),
+
+        radial-gradient(
+            circle,
+            #8ecae6 3px,
+            transparent 4px
+        );
+
+    background-size:
+        80px 90px,
+        120px 110px,
+        160px 140px;
+
+    animation:
+        confettiFall 5s
+        linear
+        infinite;
+}
+
+@keyframes confettiFall {
+
+    from {
+        transform:
+            translateY(-100px);
+    }
+
+    to {
+        transform:
+            translateY(100vh);
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE — TABLETTE
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .cake-content {
+
+        width: 100%;
+    }
+
+    .birthday-content {
+
+        width: 90%;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE — MOBILE
+========================================================= */
+
+@media (max-width: 750px) {
+
+    .letter {
+
+        transform:
+            scale(0.72);
+    }
+
+    .letter:hover {
+
+        transform:
+            scale(0.74);
+    }
+
+    .birthday-content h1 {
+
+        font-size: 48px;
+    }
+
+    .birthday-content h1 span {
+
+        font-size: 38px;
+    }
+
+    .cake-wrapper {
+
+        transform:
+            perspective(1200px)
+            rotateX(7deg)
+            scale(0.65);
+    }
+
+    .cake-content h2 {
+
+        font-size: 25px;
+    }
+
+    .cake-instruction {
+
+        font-size: 15px;
+    }
+
+    .final-message {
+
+        width: 90%;
+
+        padding:
+            30px 20px;
+    }
+
+    .final-message h1 {
+
+        font-size: 32px;
+    }
+}
+
+
+/* =========================================================
+   TRÈS PETIT ÉCRAN
+========================================================= */
+
+@media (max-width: 500px) {
+
+    .letter {
+
+        transform:
+            scale(0.55);
+    }
+
+    .letter:hover {
+
+        transform:
+            scale(0.57);
+    }
+
+    .birthday-content h1 {
+
+        font-size: 40px;
+    }
+
+    .birthday-content h1 span {
+
+        font-size: 32px;
+    }
+
+    .birthday-content p {
+
+        font-size: 16px;
+    }
+
+    .cake-wrapper {
+
+        transform:
+            perspective(1200px)
+            rotateX(7deg)
+            scale(0.48);
+    }
+}
